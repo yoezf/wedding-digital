@@ -140,12 +140,6 @@ const WEDDING_CONFIG = {
         url: "https://instagram.com/yoezf"
       },
       {
-        label: "TikTok",
-        icon: "TT",
-        iconClass: "fa-brands fa-tiktok",
-        url: "https://www.tiktok.com/@username_kamu"
-      },
-      {
         label: "WhatsApp",
         icon: "WA",
         iconClass: "fa-brands fa-whatsapp",
@@ -155,5 +149,5 @@ const WEDDING_CONFIG = {
   },
 
   // Isi setelah Google Apps Script selesai di-deploy sebagai Web App
-  googleScriptUrl: "https://script.google.com/macros/s/AKfycbzE8xk-K16UvoKsauJBTVu_fkwhFP5NIbHe3HUi5-elBtb5MmRdqeGvpwlR9fyngKjzPA/exec"
+  googleScriptUrl: "https://script.google.com/macros/s/AKfycbyjixfwNJ24fQBgWwyZ8ZqSDxCAKzOaVPQnH11vx_1S7kq2bAe-uKZ9fRRgHV5d1Y0EKQ/exec"
 };
