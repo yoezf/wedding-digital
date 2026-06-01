@@ -28,3 +28,7 @@ cream paper texture background
 sage green wedding floral background
 gold floral divider png
 watercolor flower corner transparent png
+
+
+Rekomendasi musik latar:
+assets/music/wedding.mp3 = format MP3, 128–160 kbps, durasi 30–90 detik, ukuran ideal < 2 MB, loop halus.

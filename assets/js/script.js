@@ -5,22 +5,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.title = `Wedding Invitation ${config.brideNickname || config.brideName} & ${config.groomNickname || config.groomName}`;
 
-  // Ambil nama tamu dari URL, contoh: ?to=Budi%20Santoso
-  const urlParams = new URLSearchParams(window.location.search);
-  const guestName = urlParams.get("to") || "Tamu Undangan";
+  // Mode undangan general: nama tamu tidak lagi diambil dari URL.
+  // Tamu mengisi nama langsung pada form RSVP.
 
   // Set nama pasangan
   setText("cover-couple-name", coupleName);
   setText("main-couple-name", coupleName);
   setText("closing-couple-name", coupleName);
 
-  // Set nama tamu
-  setText("guest-name-cover", guestName);
-  setText("guest-name-main", guestName);
-
   const rsvpNameInput = document.getElementById("rsvpName");
   if (rsvpNameInput) {
-    rsvpNameInput.value = guestName;
+    rsvpNameInput.value = "";
+    rsvpNameInput.readOnly = false;
   }
 
   // Set data mempelai
@@ -69,11 +65,34 @@ document.addEventListener("DOMContentLoaded", function () {
   if (openButton && cover) {
     openButton.addEventListener("click", function () {
       cover.classList.add("cover-hide");
+      playWeddingMusic();
 
       setTimeout(function () {
         cover.style.display = "none";
       }, 900);
     });
+  }
+
+  // Kontrol musik setelah undangan dibuka
+  const musicToggle = document.getElementById("musicToggle");
+  const weddingMusic = document.getElementById("weddingMusic");
+
+  if (musicToggle && weddingMusic) {
+    musicToggle.addEventListener("click", function () {
+      if (weddingMusic.paused) {
+        playWeddingMusic();
+      } else {
+        weddingMusic.pause();
+        musicToggle.classList.add("is-paused");
+        musicToggle.innerHTML = '<i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>';
+      }
+    });
+  }
+
+  // Tutup toast RSVP
+  const toastClose = document.getElementById("rsvpToastClose");
+  if (toastClose) {
+    toastClose.addEventListener("click", hideToast);
   }
 
   // Countdown
@@ -104,6 +123,40 @@ function setText(id, value) {
 
   if (element) {
     element.textContent = value;
+  }
+}
+
+function playWeddingMusic() {
+  const weddingMusic = document.getElementById("weddingMusic");
+  const musicToggle = document.getElementById("musicToggle");
+
+  if (!weddingMusic) {
+    return;
+  }
+
+  weddingMusic.volume = 0.45;
+
+  const playPromise = weddingMusic.play();
+
+  if (musicToggle) {
+    musicToggle.classList.remove("hidden");
+  }
+
+  if (playPromise !== undefined) {
+    playPromise
+      .then(function () {
+        if (musicToggle) {
+          musicToggle.classList.remove("is-paused");
+          musicToggle.innerHTML = '<i class="fa-solid fa-music" aria-hidden="true"></i>';
+        }
+      })
+      .catch(function () {
+        // Jika browser menolak autoplay atau file musik belum tersedia, tombol tetap muncul untuk dicoba manual.
+        if (musicToggle) {
+          musicToggle.classList.add("is-paused");
+          musicToggle.innerHTML = '<i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>';
+        }
+      });
   }
 }
 
@@ -195,26 +248,36 @@ function submitRSVP() {
   const statusText = document.getElementById("rsvpStatus");
   const submitButton = document.getElementById("submitRsvp");
 
-  const name = document.getElementById("rsvpName").value;
+  const name = document.getElementById("rsvpName").value.trim();
   const attendance = document.getElementById("attendance").value;
   const guestCount = document.getElementById("guestCount").value;
   const message = document.getElementById("message").value;
 
+  if (!name) {
+    statusText.textContent = "Silakan isi nama lengkap terlebih dahulu.";
+    statusText.className = "text-center text-sm mt-3 text-red-600";
+    showToast("error", "Nama belum diisi", "Silakan isi nama lengkap terlebih dahulu.");
+    return;
+  }
+
   if (!attendance) {
     statusText.textContent = "Silakan pilih status kehadiran.";
     statusText.className = "text-center text-sm mt-3 text-red-600";
+    showToast("error", "Kehadiran belum dipilih", "Silakan pilih hadir atau tidak hadir.");
     return;
   }
 
   if (!config.googleScriptUrl || config.googleScriptUrl === "ISI_LINK_GOOGLE_APPS_SCRIPT_DI_SINI") {
     statusText.textContent = "Link Google Apps Script belum diatur.";
     statusText.className = "text-center text-sm mt-3 text-red-600";
+    showToast("error", "RSVP belum aktif", "Link Google Apps Script belum diatur.");
     return;
   }
 
   submitButton.disabled = true;
   submitButton.textContent = "Mengirim...";
   statusText.textContent = "";
+  showToast("info", "Mengirim RSVP", "Mohon tunggu sebentar, konfirmasi sedang dikirim.", 2200);
 
   const formData = new URLSearchParams();
   formData.append("name", name);
@@ -233,13 +296,14 @@ function submitRSVP() {
     .then(function () {
       statusText.textContent = "Terima kasih, konfirmasi Anda berhasil dikirim.";
       statusText.className = "text-center text-sm mt-3 text-[#6B2D2D]";
+      showToast("success", "Konfirmasi terkirim", "Terima kasih, RSVP Anda berhasil dikirim.");
 
       document.getElementById("rsvpForm").reset();
-      document.getElementById("rsvpName").value = name;
     })
     .catch(function () {
       statusText.textContent = "Maaf, terjadi kesalahan. Silakan coba lagi.";
       statusText.className = "text-center text-sm mt-3 text-red-600";
+      showToast("error", "Gagal mengirim", "Maaf, terjadi kesalahan. Silakan coba lagi.");
     })
     .finally(function () {
       submitButton.disabled = false;
@@ -355,6 +419,55 @@ function renderSocialLinks(socialLinks) {
 
     container.appendChild(link);
   });
+}
+
+let toastTimer = null;
+
+function showToast(type, title, message, duration = 4200) {
+  const toast = document.getElementById("rsvpToast");
+  const box = document.getElementById("rsvpToastBox");
+  const iconWrap = document.getElementById("rsvpToastIcon");
+  const icon = document.getElementById("rsvpToastIconInner");
+  const titleEl = document.getElementById("rsvpToastTitle");
+  const messageEl = document.getElementById("rsvpToastMessage");
+
+  if (!toast || !box || !iconWrap || !icon || !titleEl || !messageEl) {
+    return;
+  }
+
+  const variant = type || "success";
+
+  box.classList.remove("is-success", "is-error", "is-info");
+  box.classList.add(`is-${variant}`);
+
+  if (variant === "error") {
+    icon.className = "fa-solid fa-triangle-exclamation";
+  } else if (variant === "info") {
+    icon.className = "fa-solid fa-spinner fa-spin";
+  } else {
+    icon.className = "fa-solid fa-check";
+  }
+
+  titleEl.textContent = title || "Notifikasi";
+  messageEl.textContent = message || "";
+
+  toast.classList.add("is-visible");
+
+  if (toastTimer) {
+    clearTimeout(toastTimer);
+  }
+
+  toastTimer = setTimeout(hideToast, duration);
+}
+
+function hideToast() {
+  const toast = document.getElementById("rsvpToast");
+
+  if (!toast) {
+    return;
+  }
+
+  toast.classList.remove("is-visible");
 }
 
 function escapeHTML(value) {

@@ -6,11 +6,44 @@
 
   <title>Wedding Invitation Mira & Arif</title>
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
-  <link rel="shortcut icon" href="assets/img/favicon.svg" />
+  <!-- SEO / WhatsApp Preview -->
+  <meta name="description" content="Undangan pernikahan Mira Antika & Arif Rifaldi. Sabtu, 6 Juni 2026 di Lapangan Sepak Bola Andika FC, Katapang." />
+  <meta name="theme-color" content="#6B2D2D" />
+  <meta property="og:site_name" content="Wedding Invitation Mira & Arif" />
+  <meta property="og:title" content="Wedding Invitation Mira & Arif" />
+  <meta property="og:description" content="Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara pernikahan Mira Antika & Arif Rifaldi." />
+  <meta property="og:image" content="https://yoezf.github.io/wedding-digital/assets/img/cover.webp" />
+  <meta property="og:image:alt" content="Wedding Invitation Mira & Arif" />
+  <meta property="og:url" content="https://yoezf.github.io/wedding-digital/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="id_ID" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Wedding Invitation Mira & Arif" />
+  <meta name="twitter:description" content="Undangan pernikahan Mira Antika & Arif Rifaldi. Sabtu, 6 Juni 2026." />
+  <meta name="twitter:image" content="https://yoezf.github.io/wedding-digital/assets/img/cover.webp" />
+
+  <!-- Favicon online / CDN -->
+  <link rel="icon" type="image/png" sizes="72x72" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f48d.png?v=2" />
+  <link rel="shortcut icon" type="image/png" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f48d.png?v=2" />
+  <link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f48d.png?v=2" />
+  <link rel="alternate icon" type="image/svg+xml" href="assets/img/favicon.svg" />
 
   <!-- Tailwind CDN -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            mahogany: '#6B2D2D',
+            'mahogany-dark': '#4D1F1F',
+            'gold-soft': '#E4C98E',
+            cream: '#F9F4EC',
+            sage: '#EDF3EA'
+          }
+        }
+      }
+    }
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Font Awesome CDN untuk icon sosial media -->
@@ -28,6 +61,30 @@
   <div class="petal petal-3">❁</div>
   <div class="petal petal-4">🍃</div>
 
+  <!-- Musik latar: mulai setelah tombol Buka Undangan diklik -->
+  <audio id="weddingMusic" src="assets/music/wedding.mp3" preload="auto" loop></audio>
+  <button id="musicToggle" class="music-toggle hidden" type="button" aria-label="Pause atau play musik">
+    <i class="fa-solid fa-music" aria-hidden="true"></i>
+  </button>
+
+  <!-- Toast notifikasi RSVP -->
+  <div id="rsvpToast" class="rsvp-toast" role="status" aria-live="polite" aria-atomic="true">
+    <div id="rsvpToastBox" class="rsvp-toast-box">
+      <div id="rsvpToastIcon" class="rsvp-toast-icon">
+        <i id="rsvpToastIconInner" class="fa-solid fa-check" aria-hidden="true"></i>
+      </div>
+
+      <div class="rsvp-toast-content">
+        <p id="rsvpToastTitle" class="rsvp-toast-title">Berhasil</p>
+        <p id="rsvpToastMessage" class="rsvp-toast-message">Konfirmasi berhasil dikirim.</p>
+      </div>
+
+      <button id="rsvpToastClose" class="rsvp-toast-close" type="button" aria-label="Tutup notifikasi">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+
   <!-- COVER -->
   <section id="cover" class="fixed inset-0 z-50 flex items-center justify-center bg-cover bg-center text-center px-6" style="background-image: url('assets/img/cover.webp');">
     <div class="absolute inset-0 cover-overlay"></div>
@@ -37,14 +94,12 @@
 
       <p class="tracking-[0.4em] text-xs uppercase mb-4 text-gold-soft">The Wedding of</p>
 
-      <h1 id="cover-couple-name" class="text-5xl md:text-6xl font-serif leading-tight mb-6">
+      <h1 id="cover-couple-name" class="font-serif leading-tight mb-5 text-[clamp(2rem,10vw,3.2rem)] sm:text-5xl md:text-6xl">
         Mira Antika & Arif Rifaldi
       </h1>
 
-      <p class="text-sm mb-2 opacity-90">Kepada Yth.</p>
-      <p class="text-sm opacity-90">Bapak/Ibu/Saudara/i</p>
-
-      <h2 id="guest-name-cover" class="text-2xl font-semibold mt-2 mb-8">
+      <p class="text-sm mb-2 opacity-90">Kepada Bapak/Ibu/Saudara/i</p>
+      <h2 class="text-2xl font-semibold mt-2 mb-8">
         Tamu Undangan
       </h2>
 
@@ -72,11 +127,11 @@
       <div class="max-w-xl mx-auto animate-fade-up relative z-10">
         <p class="section-label mb-4">Wedding Invitation</p>
 
-        <div class="mx-auto mb-8 w-64 h-80 rounded-t-full overflow-hidden shadow-2xl border-[6px] border-white bg-white">
+        <div class="hero-photo-frame mx-auto mb-8 w-64 h-80 rounded-t-full overflow-hidden shadow-2xl border-[6px] border-white bg-white">
           <img src="assets/img/couple.webp" alt="Foto Mira dan Arif" class="w-full h-full object-cover" onerror="this.style.display='none'" />
         </div>
 
-        <h1 id="main-couple-name" class="text-5xl md:text-6xl font-serif text-mahogany mb-4 leading-tight">
+        <h1 id="main-couple-name" class="font-serif text-mahogany mb-4 leading-tight text-[clamp(2rem,10vw,3.35rem)] sm:text-5xl md:text-6xl">
           Mira Antika & Arif Rifaldi
         </h1>
 
@@ -86,12 +141,14 @@
           Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara pernikahan kami.
         </p>
 
-        <div class="glass-card rounded-3xl p-5 shadow max-w-sm mx-auto">
-          <p class="text-sm text-stone-500">Kepada Yth.</p>
-          <p class="text-sm text-stone-500">Bapak/Ibu/Saudara/i</p>
-          <h2 id="guest-name-main" class="text-2xl font-semibold text-mahogany mt-2">
-            Tamu Undangan
+        <div class="glass-card invitation-general-card relative z-10 w-[min(100%,21.5rem)] sm:max-w-sm mx-auto rounded-[1.25rem] sm:rounded-3xl px-4 py-4 sm:p-5 shadow overflow-hidden">
+          <p class="text-[0.78rem] sm:text-sm text-stone-500 leading-snug">Undangan ini terbuka untuk</p>
+          <h2 class="font-semibold text-mahogany mt-1.5 leading-tight text-[clamp(1.1rem,5.8vw,1.5rem)] sm:text-2xl break-words">
+            <span class="block sm:inline">Bapak/Ibu</span><span class="hidden sm:inline">/</span><span class="block sm:inline">Saudara/i</span>
           </h2>
+          <p class="text-[0.76rem] sm:text-sm text-stone-500 mt-2 leading-snug px-1">
+            Mohon isi nama pada form RSVP di bawah.
+          </p>
         </div>
       </div>
     </section>
@@ -101,7 +158,7 @@
       <div class="max-w-4xl mx-auto relative z-10">
         <p class="section-label mb-3">Mempelai</p>
 
-        <h2 class="text-4xl md:text-5xl font-serif text-mahogany mb-5">
+        <h2 class="font-serif text-mahogany mb-5 leading-tight text-[clamp(1.8rem,8vw,2.6rem)] md:text-5xl">
           Assalamu’alaikum Warahmatullahi Wabarakatuh
         </h2>
 
@@ -117,7 +174,7 @@
               <img src="assets/img/bride.webp" alt="Mempelai Wanita" class="w-full h-full object-cover rounded-full" />
             </div>
             <p class="text-gold-soft uppercase tracking-[0.25em] text-xs font-semibold mb-2">The Bride</p>
-            <h3 id="bride-name" class="text-4xl font-serif text-mahogany">Mira Antika</h3>
+            <h3 id="bride-name" class="font-serif text-mahogany leading-tight text-[clamp(1.8rem,8vw,2.55rem)]">Mira Antika</h3>
             <p id="bride-parent" class="mt-3 text-stone-600">
               Putri dari Bapak Alo & Ibu Holisoh
             </p>
@@ -128,7 +185,7 @@
               <img src="assets/img/groom.webp" alt="Mempelai Pria" class="w-full h-full object-cover rounded-full" />
             </div>
             <p class="text-gold-soft uppercase tracking-[0.25em] text-xs font-semibold mb-2">The Groom</p>
-            <h3 id="groom-name" class="text-4xl font-serif text-mahogany">Arif Rifaldi</h3>
+            <h3 id="groom-name" class="font-serif text-mahogany leading-tight text-[clamp(1.8rem,8vw,2.55rem)]">Arif Rifaldi</h3>
             <p id="groom-parent" class="mt-3 text-stone-600">
               Putra dari Bapak Dadang & Ibu Eulis
             </p>
@@ -142,11 +199,11 @@
       <div class="max-w-3xl mx-auto">
         <p class="section-label mb-3">Countdown</p>
 
-        <h2 class="text-4xl md:text-5xl font-serif text-mahogany mb-10">
+        <h2 class="font-serif text-mahogany mb-10 leading-tight text-[clamp(1.8rem,8vw,2.6rem)] md:text-5xl">
           Menuju Hari Bahagia
         </h2>
 
-        <div class="grid grid-cols-4 gap-3 max-w-xl mx-auto">
+        <div class="countdown-grid grid grid-cols-4 gap-3 max-w-xl mx-auto">
           <div class="countdown-card">
             <div id="days" class="text-3xl font-bold text-mahogany">0</div>
             <p class="text-sm text-stone-500">Hari</p>
@@ -175,34 +232,34 @@
       <div class="max-w-4xl mx-auto">
         <p class="section-label mb-3">Detail Acara</p>
 
-        <h2 class="text-4xl md:text-5xl font-serif text-mahogany mb-10">
+        <h2 class="font-serif text-mahogany mb-10 leading-tight text-[clamp(1.8rem,8vw,2.6rem)] md:text-5xl">
           Akad & Resepsi
         </h2>
 
         <div class="grid md:grid-cols-2 gap-6">
           <div class="event-card">
             <img src="assets/img/ornaments/ring-icon.svg" alt="" class="w-12 mx-auto mb-4" />
-            <h3 class="text-3xl font-serif text-mahogany mb-4">
+            <h3 class="font-serif text-mahogany mb-4 leading-tight text-[clamp(1.65rem,7vw,2.25rem)]">
               Akad Nikah
             </h3>
 
             <p id="akad-date" class="font-semibold">Sabtu, 6 Juni 2026</p>
             <p id="akad-time">08.00 WIB - Selesai</p>
             <p id="akad-location" class="mt-4 text-stone-600 leading-relaxed">
-              JL. Kp. Katapang RT04 RW 07, Kec. Katapang, Desa Katapang, Kab. Bandung
+              Lapangan Sepak Bola Andika Fc, Katapang, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921
             </p>
           </div>
 
           <div class="event-card">
             <img src="assets/img/ornaments/calendar-icon.svg" alt="" class="w-12 mx-auto mb-4" />
-            <h3 class="text-3xl font-serif text-mahogany mb-4">
+            <h3 class="font-serif text-mahogany mb-4 leading-tight text-[clamp(1.65rem,7vw,2.25rem)]">
               Resepsi
             </h3>
 
             <p id="resepsi-date" class="font-semibold">Sabtu, 6 Juni 2026</p>
             <p id="resepsi-time">11.30 - 13.45 WIB</p>
             <p id="resepsi-location" class="mt-4 text-stone-600 leading-relaxed">
-              JL. Kp. Katapang RT04 RW 07, Kec. Katapang, Desa Katapang, Kab. Bandung
+              Lapangan Sepak Bola Andika Fc, Katapang, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921
             </p>
           </div>
         </div>
@@ -211,7 +268,7 @@
         <div class="map-card mt-10">
           <div class="flex items-center justify-center gap-3 mb-5">
             <img src="assets/img/ornaments/map-icon.svg" alt="" class="w-9" />
-            <h3 class="text-2xl font-serif text-mahogany">
+            <h3 class="font-serif text-mahogany leading-tight text-[clamp(1.4rem,6vw,1.85rem)]">
               Lokasi Acara
             </h3>
           </div>
@@ -273,19 +330,27 @@
           <img src="assets/img/ornaments/rsvp-icon.svg" alt="" class="w-12 mx-auto mb-4" />
           <p class="section-label mb-3">RSVP</p>
 
-          <h2 class="text-4xl font-serif text-mahogany">
+          <h2 class="font-serif text-mahogany leading-tight text-[clamp(1.8rem,8vw,2.55rem)]">
             Konfirmasi Kehadiran
           </h2>
 
           <p class="text-stone-600 mt-3">
-            Mohon konfirmasi kehadiran Bapak/Ibu/Saudara/i.
+            Mohon isi nama dan konfirmasi ketersediaan hadir Bapak/Ibu/Saudara/i.
           </p>
         </div>
 
         <form id="rsvpForm" class="space-y-5">
           <div>
-            <label class="block text-sm font-semibold mb-2 text-mahogany">Nama Tamu</label>
-            <input type="text" id="rsvpName" name="name" readonly class="form-control bg-stone-50" />
+            <label class="block text-sm font-semibold mb-2 text-mahogany">Nama Lengkap</label>
+            <input
+              type="text"
+              id="rsvpName"
+              name="name"
+              required
+              autocomplete="name"
+              class="form-control"
+              placeholder="Contoh: Yoezarsif"
+            />
           </div>
 
           <div>
@@ -327,7 +392,7 @@
         <img src="assets/img/ornaments/gift-icon.svg" alt="" class="w-12 mx-auto mb-4" />
         <p class="section-label mb-3">Wedding Gift</p>
 
-        <h2 class="text-4xl md:text-5xl font-serif text-mahogany mb-5">
+        <h2 class="font-serif text-mahogany mb-5 leading-tight text-[clamp(1.8rem,8vw,2.6rem)] md:text-5xl">
           Hadiah Online
         </h2>
 
@@ -365,7 +430,7 @@
       <div class="max-w-5xl mx-auto">
         <p class="section-label mb-3">Gallery</p>
 
-        <h2 class="text-4xl md:text-5xl font-serif text-mahogany mb-10">
+        <h2 class="font-serif text-mahogany mb-10 leading-tight text-[clamp(1.8rem,8vw,2.6rem)] md:text-5xl">
           Momen Bahagia
         </h2>
 
@@ -382,7 +447,7 @@
       <div class="max-w-xl mx-auto">
         <img src="assets/img/ornaments/gold-divider.svg" alt="" class="w-28 mx-auto mb-6 opacity-90" />
 
-        <h2 class="text-4xl md:text-5xl font-serif mb-6">
+        <h2 class="font-serif mb-6 leading-tight text-[clamp(1.85rem,8vw,2.65rem)] md:text-5xl">
           Terima Kasih
         </h2>
 
@@ -390,7 +455,7 @@
           Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.
         </p>
 
-        <h3 id="closing-couple-name" class="text-4xl md:text-5xl font-serif text-gold-soft">
+        <h3 id="closing-couple-name" class="font-serif text-gold-soft leading-tight text-[clamp(2rem,9vw,3.2rem)] md:text-5xl">
           Mira Antika & Arif Rifaldi
         </h3>
       </div>

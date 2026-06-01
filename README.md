@@ -124,3 +124,77 @@ Bagian hadiah online menggunakan DANA:
 
 - DANA: 0838-7526-0529
 - A/n Arif Rifaldi
+
+## Update Sistem Undangan General
+
+Sistem nama tamu otomatis melalui link `?to=NamaTamu` sudah tidak digunakan sebagai alur utama.
+
+Perubahan terbaru:
+
+1. Undangan bersifat general, sehingga link bisa dibagikan tanpa parameter nama.
+2. Tampilan cover tidak lagi menampilkan nama tamu personal.
+3. Form RSVP sekarang meminta tamu mengisi nama lengkap secara manual.
+4. Field nama pada RSVP tidak lagi `readonly`.
+5. Data yang masuk ke Google Sheets tetap menggunakan kolom `Nama Tamu`, tetapi nilainya berasal dari input tamu di web.
+
+Link undangan cukup menggunakan:
+
+```text
+https://yoezf.github.io/wedding-digital/
+```
+
+Boleh juga tetap memakai link dengan parameter `?to=...`, tetapi parameter tersebut tidak lagi otomatis mengisi nama tamu.
+
+
+## Update Mobile + Maps + Favicon CDN
+
+- Layout mobile diperhalus untuk cover, hero photo, countdown 2 kolom di HP, form RSVP, map, dan wedding gift.
+- Lokasi acara diganti menjadi: `2H22+9JJ Lapangan Sepak Bola Andika Fc, Katapang, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921`.
+- Tombol Google Maps memakai Google Maps Search URL, sedangkan peta langsung memakai embed URL dari alamat tersebut.
+- Favicon sekarang memakai CDN Twemoji ring: `https://cdn.jsdelivr.net/npm/twemoji@14.0.2/assets/svg/1f48d.svg`.
+
+## Rekomendasi Musik
+
+Format paling aman: `MP3`.
+
+Saran teknis:
+
+- Nama file: `assets/music/wedding.mp3`
+- Format: MP3
+- Bitrate: 128 kbps atau 160 kbps
+- Durasi: 30–90 detik, dibuat loop halus
+- Ukuran file: idealnya di bawah 2 MB, maksimal sekitar 3 MB
+- Hindari musik berhak cipta jika undangan dibagikan publik
+
+Catatan: browser biasanya tidak mengizinkan musik autoplay sebelum ada interaksi pengguna. Musik sebaiknya dimulai setelah tombol **Buka Undangan** diklik.
+
+
+## Update terbaru: mobile, favicon, musik, dan resepsi
+
+- Ukuran font mobile diperkecil agar lebih proporsional di layar HP.
+- Favicon CDN diganti ke Twemoji PNG via jsDelivr agar lebih mudah tampil di browser.
+- Musik latar akan mulai setelah tombol **Buka Undangan** diklik. Simpan file musik sebagai `assets/music/wedding.mp3`.
+- Jam resepsi diubah menjadi `11.00 WIB - Selesai`.
+
+### Format musik yang disarankan
+
+- Format utama: MP3
+- Bitrate: 128 kbps atau 160 kbps
+- Durasi: 30–90 detik, bisa loop
+- Ukuran file: idealnya di bawah 2 MB
+- Nama file: `assets/music/wedding.mp3`
+
+
+## Update Tailwind Mobile Responsive
+
+- Card undangan general di bagian hero dibuat lebih responsif dengan utility Tailwind CDN.
+- Teks `Bapak/Ibu/Saudara/i` dipecah menjadi dua baris di mobile agar tidak melebar.
+- Ukuran judul section dan judul pasangan dibuat memakai `clamp()` melalui class Tailwind arbitrary value.
+- Tambahan CSS hanya sebagai fallback untuk layar kecil di bawah 420px.
+
+
+## Update Toast RSVP + WhatsApp Preview
+
+- Ditambahkan Open Graph meta tag agar link undangan memiliki preview yang lebih rapi saat dibagikan ke WhatsApp/Facebook.
+- Ditambahkan toast notifikasi untuk RSVP: validasi nama, validasi kehadiran, status mengirim, sukses, dan gagal.
+- Preview image menggunakan: `https://yoezf.github.io/wedding-digital/assets/img/cover.webp`. Pastikan file `assets/img/cover.webp` sudah tersedia di repository GitHub Pages.

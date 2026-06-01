@@ -13,18 +13,18 @@ const WEDDING_CONFIG = {
   akad: {
     date: "Sabtu, 6 Juni 2026",
     time: "08.00 WIB - Selesai",
-    location: "JL. Kp. Katapang RT04 RW 07, Kec. Katapang, Desa Katapang, Kab. Bandung"
+    location: "2H22+9JJ Lapangan Sepak Bola Andika Fc, Katapang, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921"
   },
 
   resepsi: {
     date: "Sabtu, 6 Juni 2026",
-    time: "11.30 - 13.45 WIB",
-    location: "JL. Kp. Katapang RT04 RW 07, Kec. Katapang, Desa Katapang, Kab. Bandung"
+    time: "11.00 WIB - Selesai",
+    location: "2H22+9JJ Lapangan Sepak Bola Andika Fc, Katapang, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921"
   },
 
-  googleMapsLink: "https://goo.gl/maps/YNY4UDBjfbshjvUp7?g_st=aw",
+  googleMapsLink: "https://www.google.com/maps/search/?api=1&query=2H22%2B9JJ%20Lapangan%20Sepak%20Bola%20Andika%20Fc%2C%20Katapang%2C%20Kec.%20Katapang%2C%20Kabupaten%20Bandung%2C%20Jawa%20Barat%2040921",
 
-  googleMapsEmbedUrl: "https://www.google.com/maps?q=JL.%20Kp.%20Katapang%20RT04%20RW%2007%20Kec.%20Katapang%20Desa%20Katapang%20Kab.%20Bandung&output=embed",
+  googleMapsEmbedUrl: "https://www.google.com/maps?q=2H22%2B9JJ%20Lapangan%20Sepak%20Bola%20Andika%20Fc%2C%20Katapang%2C%20Kec.%20Katapang%2C%20Kabupaten%20Bandung%2C%20Jawa%20Barat%2040921&output=embed",
 
   dresscode: "Mahogany",
 

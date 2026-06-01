@@ -720,3 +720,517 @@ iframe {
     font-size: 0.65rem;
   }
 }
+
+
+/* =========================================================
+   Extra mobile refinement - v2
+   Fokus: layar HP kecil, form RSVP, countdown, maps, dan cover
+   ========================================================= */
+:root {
+  --mobile-section-y: clamp(3rem, 11vw, 4.5rem);
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: rgba(107, 45, 45, 0.16);
+}
+
+input,
+select,
+textarea {
+  min-height: 48px;
+}
+
+@media (max-width: 767px) {
+  .section-cream,
+  .section-sage,
+  .section-white,
+  .section-mahogany {
+    padding-top: var(--mobile-section-y) !important;
+    padding-bottom: var(--mobile-section-y) !important;
+  }
+
+  .hero-photo-frame {
+    width: min(72vw, 15.5rem) !important;
+    height: min(90vw, 19.5rem) !important;
+    margin-bottom: 1.5rem !important;
+    border-width: 5px !important;
+  }
+
+  .glass-card {
+    width: 100%;
+    max-width: 22rem;
+    padding: 1rem !important;
+  }
+
+  .countdown-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    max-width: 21rem !important;
+    gap: 0.75rem !important;
+  }
+
+  .countdown-card {
+    min-height: 5.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .event-card,
+  .profile-card,
+  .gift-card,
+  .map-card {
+    width: 100%;
+    box-shadow: 0 12px 36px rgba(76, 37, 37, 0.08);
+  }
+
+  .map-card .flex {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .map-frame {
+    height: min(62vw, 260px) !important;
+  }
+
+  #rsvpForm {
+    gap: 1rem;
+  }
+
+  #rsvpForm .form-control {
+    border-radius: 0.9rem;
+    padding: 0.9rem 0.95rem;
+  }
+
+  #rsvpForm textarea.form-control {
+    min-height: 7.5rem;
+  }
+
+  #submitRsvp,
+  #copyAccount {
+    width: 100%;
+  }
+
+  .creator-footer {
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 480px) {
+  #cover {
+    padding: 0.85rem 0.85rem 4rem !important;
+  }
+
+  .cover-frame {
+    max-height: calc(100dvh - 5rem);
+    padding: 1rem 0.85rem !important;
+  }
+
+  .cover-frame h1 {
+    font-size: clamp(2rem, 12.5vw, 3.05rem) !important;
+    line-height: 0.98 !important;
+  }
+
+  .cover-frame p {
+    font-size: 0.78rem;
+  }
+
+  .btn-light,
+  .btn-primary {
+    max-width: 100% !important;
+    min-height: 48px;
+  }
+
+  .section-label {
+    letter-spacing: 0.18em !important;
+  }
+
+  #main-couple-name,
+  #closing-couple-name {
+    font-size: clamp(2.25rem, 12vw, 3.25rem) !important;
+  }
+
+  .section-white h2,
+  .section-sage h2,
+  .section-mahogany h2,
+  .section-cream h2 {
+    font-size: clamp(1.9rem, 9.2vw, 2.65rem) !important;
+  }
+
+  .profile-card h3,
+  .event-card h3 {
+    font-size: clamp(1.85rem, 9vw, 2.35rem) !important;
+  }
+
+  .countdown-grid {
+    gap: 0.6rem !important;
+  }
+
+  .gift-card img[alt="QR Hadiah Online"] {
+    width: min(68vw, 13rem) !important;
+    height: min(68vw, 13rem) !important;
+  }
+
+  #account-number {
+    font-size: clamp(1.15rem, 6vw, 1.55rem) !important;
+    letter-spacing: 0.08em;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 340px) {
+  .countdown-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.45rem !important;
+  }
+
+  .countdown-card {
+    min-height: 4.8rem;
+  }
+
+  .cover-credit {
+    transform: translateX(-50%) scale(0.94);
+  }
+}
+
+
+/* =========================================================
+   Update: mobile typography lebih kecil + kontrol musik
+   ========================================================= */
+.music-toggle {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  z-index: 45;
+  width: 2.8rem;
+  height: 2.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(107, 45, 45, 0.92);
+  border: 1px solid rgba(228, 201, 142, 0.55);
+  box-shadow: 0 14px 35px rgba(76, 37, 37, 0.22);
+  backdrop-filter: blur(8px);
+  transition: 0.25s ease;
+}
+
+.music-toggle:hover {
+  transform: translateY(-2px);
+  background: var(--mahogany-dark);
+}
+
+.music-toggle.hidden {
+  display: none !important;
+}
+
+.music-toggle.is-paused {
+  background: rgba(87, 83, 78, 0.88);
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  #cover {
+    padding: 0.8rem 0.85rem 3.85rem !important;
+  }
+
+  .cover-frame {
+    padding: 1rem 0.85rem !important;
+    border-radius: 1.25rem !important;
+  }
+
+  .cover-frame img {
+    width: 4.8rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .cover-frame h1 {
+    font-size: clamp(1.85rem, 10.5vw, 2.65rem) !important;
+    line-height: 1.02 !important;
+    margin-bottom: 0.85rem !important;
+  }
+
+  .cover-frame h2 {
+    font-size: 1.05rem !important;
+    margin-bottom: 1.1rem !important;
+  }
+
+  .cover-frame p {
+    font-size: 0.72rem !important;
+    margin-bottom: 0.55rem !important;
+  }
+
+  .hero-photo-frame {
+    width: min(58vw, 12rem) !important;
+    height: min(72vw, 15rem) !important;
+    margin-bottom: 1.4rem !important;
+  }
+
+  #main-couple-name,
+  #closing-couple-name {
+    font-size: clamp(2rem, 9.5vw, 2.85rem) !important;
+    line-height: 1.05 !important;
+  }
+
+  .section-white h2,
+  .section-sage h2,
+  .section-mahogany h2,
+  .section-cream h2 {
+    font-size: clamp(1.55rem, 7.8vw, 2.25rem) !important;
+    line-height: 1.12 !important;
+  }
+
+  .profile-card h3,
+  .event-card h3 {
+    font-size: clamp(1.55rem, 7.5vw, 2.15rem) !important;
+    line-height: 1.1 !important;
+  }
+
+  .section-label {
+    font-size: 0.62rem !important;
+    letter-spacing: 0.15em !important;
+  }
+
+  .profile-card,
+  .event-card,
+  .gift-card,
+  .map-card {
+    padding: 1rem !important;
+    border-radius: 1.2rem !important;
+  }
+
+  .avatar-ring {
+    width: 7.8rem !important;
+    height: 7.8rem !important;
+  }
+
+  .countdown-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.65rem !important;
+    max-width: 20rem !important;
+  }
+
+  .countdown-card div {
+    font-size: clamp(1.35rem, 7vw, 1.9rem) !important;
+  }
+
+  .countdown-card p {
+    font-size: 0.7rem !important;
+  }
+
+  .form-control {
+    font-size: 0.92rem !important;
+    padding: 0.78rem 0.9rem !important;
+  }
+
+  .btn-light,
+  .btn-primary {
+    min-height: 44px !important;
+    font-size: 0.9rem !important;
+    padding: 0.72rem 1rem !important;
+  }
+
+  .map-frame {
+    height: 235px !important;
+  }
+
+  .music-toggle {
+    width: 2.45rem;
+    height: 2.45rem;
+    right: 0.85rem;
+    bottom: calc(0.85rem + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 380px) {
+  body {
+    font-size: 0.86rem;
+  }
+
+  .cover-frame h1 {
+    font-size: clamp(1.7rem, 10vw, 2.35rem) !important;
+  }
+
+  #main-couple-name,
+  #closing-couple-name {
+    font-size: clamp(1.85rem, 9vw, 2.5rem) !important;
+  }
+
+  .section-white h2,
+  .section-sage h2,
+  .section-mahogany h2,
+  .section-cream h2 {
+    font-size: clamp(1.45rem, 7vw, 2rem) !important;
+  }
+}
+
+
+/* =========================================================
+   Tailwind-friendly mobile fix for general invitation card
+   ========================================================= */
+.invitation-general-card {
+  isolation: isolate;
+}
+
+.invitation-general-card h2 {
+  max-width: 100%;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+@media (max-width: 420px) {
+  .invitation-general-card {
+    width: min(100%, calc(100vw - 2rem)) !important;
+    padding: 0.95rem 0.85rem !important;
+    border-radius: 1.15rem !important;
+  }
+
+  .invitation-general-card h2 {
+    font-size: clamp(1.08rem, 5.6vw, 1.38rem) !important;
+    line-height: 1.08 !important;
+  }
+
+  .invitation-general-card p {
+    font-size: 0.74rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .invitation-general-card {
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+  }
+
+  .invitation-general-card h2 {
+    font-size: clamp(1rem, 5.2vw, 1.24rem) !important;
+  }
+}
+
+
+/* =========================================================
+   Toast / modal ringan untuk status RSVP
+   ========================================================= */
+.rsvp-toast {
+  position: fixed;
+  top: calc(1rem + env(safe-area-inset-top));
+  left: 50%;
+  z-index: 80;
+  width: min(92vw, 24rem);
+  transform: translate(-50%, -0.9rem);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.rsvp-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+
+.rsvp-toast-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.85rem 0.9rem;
+  border-radius: 1.1rem;
+  border: 1px solid rgba(228, 201, 142, 0.62);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 18px 55px rgba(76, 37, 37, 0.18);
+  backdrop-filter: blur(10px);
+}
+
+.rsvp-toast-icon {
+  width: 2.1rem;
+  height: 2.1rem;
+  flex: 0 0 2.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--mahogany);
+  margin-top: 0.05rem;
+}
+
+.rsvp-toast-box.is-error .rsvp-toast-icon {
+  background: #b91c1c;
+}
+
+.rsvp-toast-box.is-info .rsvp-toast-icon {
+  background: #57534e;
+}
+
+.rsvp-toast-content {
+  min-width: 0;
+  flex: 1;
+  text-align: left;
+}
+
+.rsvp-toast-title {
+  margin: 0;
+  color: var(--mahogany);
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.rsvp-toast-box.is-error .rsvp-toast-title {
+  color: #991b1b;
+}
+
+.rsvp-toast-message {
+  margin-top: 0.15rem;
+  color: var(--stone);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.rsvp-toast-close {
+  width: 1.9rem;
+  height: 1.9rem;
+  flex: 0 0 1.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  color: rgba(87, 83, 78, 0.78);
+  background: rgba(87, 83, 78, 0.08);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.rsvp-toast-close:hover {
+  color: var(--mahogany);
+  background: rgba(107, 45, 45, 0.10);
+}
+
+@media (max-width: 480px) {
+  .rsvp-toast {
+    top: calc(0.75rem + env(safe-area-inset-top));
+    width: min(94vw, 22rem);
+  }
+
+  .rsvp-toast-box {
+    padding: 0.75rem;
+    border-radius: 1rem;
+  }
+
+  .rsvp-toast-title {
+    font-size: 0.82rem;
+  }
+
+  .rsvp-toast-message {
+    font-size: 0.72rem;
+  }
+}
