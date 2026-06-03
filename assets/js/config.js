@@ -12,7 +12,7 @@ const WEDDING_CONFIG = {
 
   akad: {
     date: "Sabtu, 6 Juni 2026",
-    time: "08.00 WIB - Selesai",
+    time: "09.00 WIB - Selesai",
     location: "2H22+9JJ Lapangan Sepak Bola Andika Fc, Katapang, Kec. Katapang, Kabupaten Bandung, Jawa Barat 40921"
   },
 
